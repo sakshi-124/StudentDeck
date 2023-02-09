@@ -8,3 +8,9 @@ Java (Spring Boot) based web application for international students to help with
 # Build with
 1. [Java] - Programming language 
 2. [Maven] - Automation tool
+3. [Heroku]- Deployment Tool
+# Learning outcome
+Clean code practice 
+Design patterns 
+S.O.L.I.D principles 
+Deployement
