@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign Up</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script type="text/javascript" th:src="@{/scripts/signin.js}"></script>
+
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid" >
+    <div class="header row-1">
+        Sign Up
+    </div>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Sign Up</h2>
+                    <p id ="clickedBtn" name ="clickedBtn" > <!--th:value="${user?.clickedBtn}"--> </p>
+                    <div class="tab">
+                        <button class="tablinks" onclick="openForm(event, 'Student')" id="btnStudent" name="btnStudent">Student</button>
+                        <button class="tablinks" onclick="openForm(event, 'Landlord')"  id = "btnLandlord" name="btnStudent">Landlord</button>
+                        <button class="tablinks" onclick="openForm(event, 'Admin')"  id="btnAdmin" name="btnStudent" hidden>Admin</button>
+                    </div>
+
+                    <div id="Student" class="tabcontent">
+                        <h2 class="register-heading">Student Sign Up</h2>
+                        <div class="row register-form">
+                            <div class="col-md-12">
+                                <form method="POST" th:action= "@{/signUp}" modelAttribute="student" value="Student">  <!--th:action="@{/userDashboard}" -->
+                                    <div class="row">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${student?.firstName}" type="text" autofocus  placeholder="First Name" name="firstName" >
+                                            <input class="col-xs-2 " disabled>
+                                            <input class="input--style-4 col-xs-5" th:value="${student?.lastName}" type="text" placeholder="Last Name" name="lastName" >
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group col-xs-12">
+                                            <input class="input--style-4 col-xs-12" th:value="${student?.email}" type="email"   placeholder="Email" name="email" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${student?.password}" name="password"
+                                                   placeholder="Password"
+                                                   type="password" >
+                                            <input class="col-xs-2 " disabled>
+                                            <input class="input--style-4 col-xs-5" th:value="${confirmPassword}" name="confirmPassword"
+                                                   placeholder="Confirm password"
+                                                   type="password" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row" >
+                                        <div class="col-xs-12 input-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01">Gender</label>
+                                                </div>
+
+                                                <select class="custom-select" id="inputGroupSelect01" th:value="${student?.gender}" name="gender">
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Non-Binary">Non-Binary</option>
+                                                    <option value="Prefers not to say">Prefers not to say</option>
+                                                </select>
+                                            </div>
+                                            <input class="col-xs-2 ">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">Date of birth</label>
+                                            </div>
+                                            <div class="col-xs-12 input-group">
+                                                <input class="input--style-4 col-xs-5 " th:value="${student?.dateOfBirth}"  style="height: 50px;"  type="date" name="dateOfBirth">
+                                                <input class="col-xs-12 " disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-1" th:value="${student?.countryCode}" type="text"  value= "1" placeholder="+1" name="countryCode" >
+                                            <input class="col-xs-1 "disabled>
+                                            <input class="input--style-4 col-xs-10" th:value="${student?.phone}" type="text" placeholder="Contact number" name="phone" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${student?.country}" type="text"  placeholder="Country of Origin" name="country" >
+                                            <input class="col-xs-2 " disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${student?.city}" type="text"  placeholder="City" name="city" >
+                                            <input class="col-xs-2 " disabled>
+                                            <input class="input--style-4 col-xs-5" th:value="${student?.studyCountry}" type="text" placeholder="Country of study" name="studyCountry" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${student?.university}" type="text"  placeholder="University" name="university" >
+                                            <input class="col-xs-2 " disabled>
+                                            <input class="input--style-4 col-xs-5" th:value="${student?.course}" type="text" placeholder="Course" name="course" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${year}" type="text"  placeholder="Year" name="year" >
+                                            <input class="col-xs-2 " disabled>
+                                            <input class="input--style-4 col-xs-5" th:value="${semester}" type="text" placeholder="Semester" name="semester" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${student?.securityQuestion}" type="text"  placeholder="Security Question" name="securityQuestion" >
+                                            <input class="col-xs-2 " disabled>
+                                            <input class="input--style-4 col-xs-5" th:value="${student?.securityAnswer}" type="text" placeholder="Security Answer" name="securityAnswer" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-2">
+                                            <button class="btn btn--radius-2"  type="submit" value="Sign In" name="Student">Sign up</button>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <p th:each="msg : ${studentMessage}" th:text="${msg}"><p/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--LANDLORD TAB-->
+
+                    <div id = "Landlord" class="tabcontent">
+                        <h2 class="register-heading">Landlord Sign Up</h2>
+                        <div class="row register-form">
+                            <div class="col-md-12">
+                                <form method="POST"  th:action="@{/signUp}" value="Landlord">
+                                    <div class="row">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${landlord?.firstName}" type="text" autofocus  placeholder="First Name" name="firstName" >
+                                            <input class="col-xs-2 " disabled>
+                                            <input class="input--style-4 col-xs-5" th:value="${landlord?.lastName}" type="text" placeholder="Last Name" name="lastName" >
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group col-xs-12">
+                                            <input class="input--style-4 col-xs-12" th:value="${landlord?.email}" type="email"   placeholder="Email" name="email" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${landlord?.password}" name="password"
+                                                   placeholder="Password"
+                                                   type="password" >
+                                            <input class="col-xs-2 " disabled>
+                                            <input class="input--style-4 col-xs-5" th:value="${confirmPassword}" name="confirmPassword"
+                                                   placeholder="Confirm password"
+                                                   type="password" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row" >
+                                        <div class="col-xs-12 input-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01">Gender</label>
+                                                </div>
+
+                                                <select class="custom-select" id="inputGroupSelect02" th:value="${landlord?.gender}" name="gender">
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Non-Binary">Non-Binary</option>
+                                                    <option value="Prefers not to say">Prefers not to say</option>
+                                                </select>
+                                            </div>
+                                            <input class="col-xs-2 ">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">Date of birth</label>
+                                            </div>
+                                            <div class="col-xs-12 input-group">
+                                                <input class="input--style-4 col-xs-5 " th:value="${landlord?.dateOfBirth}"  style="height: 50px;"  type="date" name="dateOfBirth">
+                                                <input class="col-xs-12 " disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-1" th:value="${landlord?.countryCode}" type="text"  placeholder="+1" name="countryCode" >
+                                            <input class="col-xs-1 " disabled>
+                                            <input class="input--style-4 col-xs-10" th:value="${landlord?.phone}" type="text" placeholder="Contact number" name="phone" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="input-group col-xs-12">
+                                            <input class="input--style-4 col-xs-5" th:value="${landlord?.country}" type="text"  placeholder="Country" name="country" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${landlord?.securityQuestion}" type="text"  placeholder="Security Question" name="securityQuestion" >
+                                            <input class="col-xs-2 " disabled>
+                                            <input class="input--style-4 col-xs-5" th:value="${landlord?.securityAnswer}" type="text" placeholder="Security Answer" name="securityAnswer" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-2">
+                                            <button class="btn btn--radius-2" type="submit" value="Sign In" name="Landlord">Sign In</button>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <p th:each="msg : ${landlordMsg}" th:text="${msg}"><p/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--ADMIN TAB-->
+
+                    <div id = "Admin" class="tabcontent">
+                        <h2 class="register-heading">Admin Sign In</h2>
+                        <div class="row register-form">
+                            <div class="col-md-12">
+                                <form method="POST"  th:action="@{/signUp}"  value="Admin">
+                                    <div class="row">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${adminUser?.firstName}" type="text" autofocus  placeholder="First Name" name="firstName" >
+                                            <input class="col-xs-2 " disabled>
+                                            <input class="input--style-4 col-xs-5" th:value="${adminUser?.lastName}" type="text" placeholder="Last Name" name="lastName" >
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group col-xs-12">
+                                            <input class="input--style-4 col-xs-12" th:value="${adminUser?.email}" type="email"   placeholder="Email" name="email" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${adminUser?.password}" name="password"
+                                                   placeholder="Password"
+                                                   type="password" >
+                                            <input class="col-xs-2 " disabled>
+                                            <input class="input--style-4 col-xs-5" th:value="${confirmPassword}" name="confirmPassword"
+                                                   placeholder="Confirm password"
+                                                   type="password" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${adminUser?.securityQuestion}" type="text"  placeholder="Security Question" name="securityQuestion" >
+                                            <input class="col-xs-2 " disabled>
+                                            <input class="input--style-4 col-xs-5" th:value="${adminUser?.securityAnswer}" type="text" placeholder="Security Answer" name="securityAnswer" >
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row ">
+                                        <div class="col-2">
+                                            <button  class="btn btn--radius-2" type="submit" value="Sign In" name="Admin">Register</button>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <p th:each="msg : ${adminMsg}" th:text="${msg}"><p/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a  th:href="@{/signIn}" style="float:right"> Already have an account? Sign in Here..!!</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+
+function openForm(evt, formName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(formName).style.display = "block";
+  evt.currentTarget.className += " active";
+  document.getElementById("clickedBtn").innerHTML = formName;
+
+}
+
+document.getElementById("btnStudent").click();
+
+</script>
+</body>
+</html>

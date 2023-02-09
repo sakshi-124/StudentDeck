@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>User Blogs</title>
+  <meta charset="utf-8">
+  <link th:href="@{/css/main.css}" rel="stylesheet" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Student Deck</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a th:href="@{/userDashboard}">User Dashboard</a></li>
+        <li><a th:href="@{/userProfile}">My Profile</a></li>
+        <li><a th:href="@{/viewRequests}">View Friend Request</a></li>
+        <li><a th:href="@{/viewMyFriends}">My Friends</a></li>
+        <li><a th:href="@{/viewRentalListings}">Rental Listings</a></li>
+        <li><a th:href="@{/addBlog}">Add Blog</a></li>
+        <li class="active"><a href="#">My Blogs</a></li>
+        <li><a th:href="@{/userCommunity}">Community</a></li>
+        <li><a th:href="@{/logout}" style="float:right;">Log out</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="header row-1">
+    My Blogs
+  </div>
+  <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w680">
+      <div class="card card-4">
+        <div class="card-body">
+          <span th:if="${#lists.isEmpty(blogs)}">No Blogs Found</span>
+          <th:block th:each = "blog : ${blogs}">
+            <form method="POST" th:action="@{/userBlog}" style="margin-top: 3%;">
+              <div class="row" style="background-color: rgb(224, 232, 239); border-radius: 2%; padding: 3%;">
+                <div class="col-md-12">
+                  <div class="col-md-12">
+                    <div class="row" >
+                      <b class="row" th:text="${blog?.title}"></b>
+                    </div>
+                    <div class="row" >
+                      <div class="row" style="margin-top: 2%;" th:text="${blog?.blogDescription}"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </th:block>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

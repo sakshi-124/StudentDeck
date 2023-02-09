@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rental Details</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Student Deck</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/userDashboard}">User Dashboard</a></li>
+                <li><a th:href="@{/userProfile}">My Profile</a></li>
+                <li><a th:href="@{/viewRequests}">View Friend Request</a></li>
+                <li class="active"><a href="#">My Friends</a></li>
+                <li><a th:href="@{/viewRentalListings}">Rental Listings</a></li>
+                <li><a th:href="@{/addBlog}">Add Blog</a></li>
+                <li><a th:href="@{/userBlog}">My Blogs</a></li>
+                <li><a th:href="@{/userCommunity}">Community</a></li>
+                <li><a style="float:right;" th:href="@{/logout}">Log out</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="header row-1">
+        My Friends
+    </div>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <th:block th:each="userDetail : ${users}">
+                        <div class="row">
+							<textarea class="input--style-4 col-xs-12" readonly
+                                      rows="3"
+                                      style="background-color: rgb(224, 232, 239); margin:2%; overflow:hidden;">
+ [[ ${userDetail?.firstName}  + ' ' + ${userDetail?.lastName}]] [[ 'From ' + ${userDetail?.country} + ' going to ' + ${userDetail?.city}]]
+[['Will be studying ' + ${userDetail?.course} + ' at ' + ${userDetail?.university} + ' in the intake ' + ${userDetail?.intake}]]
+[['Please contact at ' + ${userDetail?.email}]]
+							</textarea>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>  

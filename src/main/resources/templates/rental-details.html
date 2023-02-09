@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">    
+<head>    
+<title>Rental Details</title>    
+<meta charset="utf-8">
+<link th:href="@{/css/main.css}" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> 
+</head>    
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="#">Student Deck</a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Add Apartment Listing</a></li>
+                <li><a th:href="@{/viewMyListings}">View My Listings</a></li>
+                <li><a th:href="@{/landlordNotifications}">Notifications</a></li>
+				<li><a th:href="@{/viewRentalInquiry}">Rental Inquries</a></li>
+				<li><a th:href="@{/landlordProfile}">My Profile</a></li>
+				<li><a th:href="@{/logout}">Logout</a></li>
+              </ul>
+            </div>
+          </nav>
+          
+        <div class="header row-1">
+            Add Apartment Listing
+        </div>
+        <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+            <div class="wrapper wrapper--w680">
+                <div class="card card-4">
+                    <div class="card-body">
+                        <h2 class="title">List an apartment</h2>
+                        <form method="POST" th:action="@{/addRental}">
+                            <input class="input--style-4 col-xs-12" th:value="${rental?.id}" type="text" placeholder="id" name="id" hidden="True">
+                            <div class="row">
+                                    <div class="input-group col-xs-12">
+                                        <input class="input--style-4 col-xs-12" th:value="${rental?.title}" type="text" placeholder="Title" name="title">
+                                    </div>
+                            </div>
+                            
+                            <div class="row ">
+                                <div class="input-group col-xs-12">
+                                    <textarea class="input--style-4 col-xs-12" th:text="${rental?.description}" placeholder="Description" name="description"></textarea>
+                                </div>
+                            </div>
+    
+                            <div class="row ">
+                                <div class="input-group col-xs-12">
+                                    <input class="input--style-4 col-xs-12" th:value="${rental?.address}" type="text" placeholder="Address" name="address">
+                                </div>
+                            </div>
+    
+                            <div class="row ">
+                                <div class="col-xs-12 input-group">
+                                    <input class="input--style-4 col-xs-5 " th:value="${rental?.city}" type="text" placeholder="City" name="city"> 
+                                    <input class="col-xs-2 "> 
+                                    <input class="input--style-4 col-xs-5" th:value="${rental?.country}" type="text" placeholder="Country" name="country">
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-xs-12 input-group">
+                                    <input class="input--style-4 col-xs-5 " th:value="${rental?.rent}" type="text" placeholder="Rent" name="rent"> 
+                                    <input class="col-xs-2 "> 
+                                    <input class="input--style-4 col-xs-5" th:value="${rental?.listingType}" type="text" placeholder="Type of Listing" name="listingType">
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-xs-12 input-group">
+                                    <input class="input--style-4 col-xs-5" th:value="${rental?.maxOccupancy}" type="text" placeholder="Max Occupancy" name="maxOccupancy">
+                                    <input class="col-xs-7 "> 
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="label" style="text-align: left; color: black; ">Date of Availability</label>
+                            </div>
+                            <div class ="row">
+                                <div class="col-xs-12 input-group">
+                                    <input class="input--style-4 col-xs-5 " th:value="${rental?.availability}"  style="height: 50px;"  type="date" name="availability"> 
+                                    <input class="col-xs-7 "> 
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-2">
+                                    <span th:if="${editMode} == 'True'"><button th:formaction="@{/editRental}" class="btn btn--radius-2" type="submit">Edit Details</button></span>
+                                    <span th:if="${editMode} != 'True'"><button class="btn btn--radius-2" type="submit">Submit for Verification</button></span>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-12">
+                                    <p th:each="msg : ${message}" th:text="${msg}"><p/>                                    
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>  

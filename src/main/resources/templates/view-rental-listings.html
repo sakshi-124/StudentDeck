@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">    
+<head>    
+<title>Rental Listings</title>    
+<meta charset="utf-8">
+<link th:href="@{/css/main.css}" rel="stylesheet" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> 
+</head>    
+<body>
+    <div class="container-fluid">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Student Deck</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li><a th:href="@{/userDashboard}">User Dashboard</a></li>
+					<li><a th:href="@{/userProfile}">My Profile</a></li>
+					<li><a th:href="@{/viewRequests}">View Friend Request</a></li>
+					<li><a th:href="@{/viewMyFriends}">My Friends</a></li>
+					<li class="active"><a href="#">Rental Listings</a></li>
+					<li><a th:href="@{/addBlog}">Add Blog</a></li>
+					<li><a th:href="@{/userBlog}">My Blogs</a></li>
+					<li><a th:href="@{/userCommunity}">Community</a></li>
+					<li><a th:href="@{/logout}" style="float:right;">Log out</a></li>
+				</ul>
+			</div>
+		</nav>
+        <div class="header row-1">
+            Find My Home
+        </div>
+        <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+            <div class="wrapper wrapper--w680">
+                <div class="card card-4">
+                    <div class="card-body">
+                        <span th:if="${#lists.isEmpty(rentals)}">No Rentals Found</span><br>
+						<span th:each="msg : ${message}" th:text="${msg}"></span>
+					
+                            <form method="GET" style="margin-top: 5%;" th:action="@{/viewRentalListings}">
+								<div class="row">
+									<input type="text" placeholder="City" name="city" style="border: black solid; width:70%; margin-left:5%; padding:1%;">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<button class="btn btn--radius-2" type="submit">Filter By City</button>
+								</div>
+							     <th:block th:each = "rental : ${rentals}">
+								<div class="row" style="background-color: rgb(224, 232, 239); border-radius: 2%; padding: 3%; margin:3%">
+									<div class="col-md-12">
+										<div class="row" th:text="${rental?.title + ' - ' + rental?.listingType}" style="font-size:large;"></div>
+										<div class="row" th:text="${rental?.description}" style="padding-top:2%;"></div>
+										<div class="row" th:text="${'City: ' + rental?.city}" style="padding-top:2%;"></div>
+										<div class="row" th:text="${'Address: ' + rental?.address}" style="padding-top:2%;"></div>
+										<div class="row" th:text="${'Can stay ' + rental?.maxOccupancy + ' starting from ' + rental?.availability}" style="padding-top:2%;"></div>
+										<div class="row" th:text="${rental?.rent}" style="text-align: right; display:block; font-size:large;font-weight: bold;"></div>
+									</div>
+									<button class="btn btn--radius-2" type="submit" th:formaction="@{/sendRentalInquiry/{landlordId}/{title}(landlordId=${rental?.landlordId}, title=${rental?.title})}">Send Inquiry</button>
+								</div>
+								 </th:block>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script type="text/javascript">
+	var url = window.location.href;
+	var index =url.indexOf('message');
+	if(index != -1) {
+		var url = new URL(url);
+		var c = url.searchParams.get("message");
+		alert(c);
+	}
+	</script>
+</body>
+</html>  

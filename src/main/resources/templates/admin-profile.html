@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign Up</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script type="text/javascript" th:src="@{/scripts/signin.js}"></script>
+
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid" >
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Student Deck</a>
+            </div>
+            <ul class="nav navbar-nav">   
+                <li><a th:href="@{/approveRentals}">Approve Apartment Listing</a></li>
+				<li class="active"><a >My Profile</a></li>
+				<li><a th:href="@{/logout}">Logout</a></li>
+              </ul>
+        </div>
+    </nav>
+
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title"> Admin User Profile</h2>
+                    <p id ="clickedBtn" name ="clickedBtn" > <!--th:value="${user?.clickedBtn}"--> </p>
+                    <div class="tab">
+                        <button class="tablinks" onclick="openForm(event, 'User-Details')" id="btnStudent" name="btnStudent">User Details</button>
+                        <button class="tablinks" onclick="openForm(event, 'Deactivate-Account')"  id = "btnLandlord" name="btnStudent">Deactivate account</button>
+                        <button class="tablinks" onclick="openForm(event, 'Change-Password')"  id="btnAdmin" name="btnStudent">Change password</button>
+                    </div>
+
+                    <div id="User-Details" class="tabcontent">
+                        <h2 class="register-heading">User Details</h2>
+                        <div class="row register-form">
+                            <div class="col-md-12">
+                                <form method="POST" th:action= "@{/adminProfile}" modelAttribute="admin" value="Admin">  <!--th:action="@{/userDashboard}" -->
+                                    <div class="row">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${admin?.firstName}" type="text" autofocus  placeholder="First Name" name="firstName">
+                                            <input class="col-xs-2 ">
+                                            <input class="input--style-4 col-xs-5" th:value="${admin?.lastName}" type="text" placeholder="Last Name" name="lastName">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group col-xs-12">
+                                            <input class="input--style-4 col-xs-12" th:value="${admin?.email}" type="email" placeholder="Email" name="email" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-2">
+                                            <span th:if="${editMode} == 'False'"><button th:formaction="@{/editAdminProfile}" class="btn btn--radius-2" type="submit">Edit User Profile</button></span>
+                                            <span th:if="${editMode} == 'True'"><button class="btn btn--radius-2" type="submit">Save Changes</button></span>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <p th:each="msg : ${adminMessage}" th:text="${msg}"><p/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--DEACTIVATE ACCOUNT TAB-->
+
+                    <div id = "Deactivate-Account" class="tabcontent">
+                        <h2 class="register-heading">Please answer the security question to confirm deactivation.</h2>
+                        <div class="row register-form">
+                            <div class="col-md-12">
+                                <form method="POST"  th:action="@{/deactivateAdmin}" value="Deactivate-Account">
+                                    <h4 class="register-heading" th:text="${admin?.securityQuestion}"></h4>
+                                    <div class="row ">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${securityAnswer}" name="securityAnswer"
+                                                   placeholder="Security answer"
+                                                   type="text" >
+                                            <input class="col-xs-2 ">
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-2">
+                                            <button class="btn btn--radius-2" type="submit" value="Deactivate" name="Admin">Confirm deactivation</button>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <p th:each="msg : ${adminMsg}" th:text="${msg}"><p/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Change Password TAB-->
+
+                    <div id = "Change-Password" class="tabcontent">
+                        <h2 class="register-heading">Change your password</h2>
+                        <div class="row register-form">
+                            <div class="col-md-12">
+                                <form method="POST"  th:action="@{/changeAdminPassword}"  value="Admin">
+                                    <div class="row ">
+                                        <div class="col-xs-12 input-group">
+                                            <input class="input--style-4 col-xs-5" th:value="${password}" name="oldPassword"
+                                                   placeholder="Old Password"
+                                                   type="password" >
+                                            <input class="col-xs-2 ">
+                                            <input class="input--style-4 col-xs-5" th:value="${confirmPassword}" name="newPassword"
+                                                   placeholder="New password"
+                                                   type="password" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-2">
+                                            <button  class="btn btn--radius-2" type="submit" value="Sign In" name="Admin">Change password</button>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <p th:each="msg : ${adminMsg}" th:text="${msg}"><p/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+
+function openForm(evt, formName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(formName).style.display = "block";
+  evt.currentTarget.className += " active";
+  document.getElementById("clickedBtn").innerHTML = formName;
+
+}
+
+document.getElementById("btnStudent").click();
+
+</script>
+</body>
+</html>

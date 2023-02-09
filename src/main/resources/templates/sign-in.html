@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign In</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script type="text/javascript" th:src="@{/scripts/signin.js}"></script>
+
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid" >
+    <div class="header row-1" align="center">
+        Student Deck
+    </div>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                     <h2 class="title">Sign In</h2>
+                    <!--<p id ="clickedBtn" name ="clickedBtn" >  </p> -->
+                    <div class="tab">
+                        <button class="tablinks" onclick="openForm(event, 'Student')" id="btnStudent" name="btnStudent">Student</button>
+                        <button class="tablinks" onclick="openForm(event, 'Landlord')"  id = "btnLandlord" name="btnStudent">Landlord</button>
+                        <button class="tablinks" onclick="openForm(event, 'Admin')"  id="btnAdmin" name="btnStudent">Admin</button>
+                    </div>
+
+                    <div id="Student" class="tabcontent">
+                        <h2 class="register-heading">Student Sign In</h2>
+                        <div class="row register-form">
+                            <div class="col-md-12">
+                        <form method="POST" th:action= "@{/signIn}"  value="Student">  <!--th:action="@{/userDashboard}" -->
+
+                            <div class="row">
+                                <div class="input-group col-xs-12">
+                                    <input class="input--style-4 col-xs-12" th:value="${user?.email}" type="text" autofocus  placeholder="Email" name="email" >
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="input-group col-xs-12">
+                                    <input class="input--style-4 col-xs-12" th:value="${user?.password}" name="password"
+                                           placeholder="Password"
+                                           type="password" >
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-2">
+                                    <button class="btn btn--radius-2"  type="submit" value="Sign In" name="Student">Sign In</button>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-12">
+                                    <p th:each="msg : ${studentMsg}" th:text="${msg}"><p/>
+                                </div>
+                            </div>
+                        </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id = "Landlord" class="tabcontent">
+                        <h2 class="register-heading">Landlord Sign In</h2>
+                        <div class="row register-form">
+                            <div class="col-md-12">
+                                <form method="POST"  th:action="@{/signIn}"  value="Landlord">
+
+                                    <div class="row">
+                                        <div class="input-group col-xs-12">
+                                            <input class="input--style-4 col-xs-12" name="email"   th:value="${user?.email}" placeholder="Email"
+                                                   type="text"  autofocus>
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="input-group col-xs-12">
+                                            <input class="input--style-4 col-xs-12"  th:value="${user?.password}" name="password"
+                                                   placeholder="Password"
+                                                   type="password" ></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-2">
+                                            <button class="btn btn--radius-2" type="submit" value="Sign In" name="Landlord">Sign In</button>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <p th:each="msg : ${landlordMsg}" th:text="${msg}"><p/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id = "Admin" class="tabcontent">
+                        <h2 class="register-heading">Admin Sign In</h2>
+                        <div class="row register-form">
+                            <div class="col-md-12">
+                                <form method="POST"  th:action="@{/signIn}"  value="Admin">
+
+                                    <div class="row">
+                                        <div class="input-group col-xs-12">
+                                            <input class="input--style-4 col-xs-12"  th:value="${user?.email}" name="email" placeholder="Email"
+                                                   type="text"  autofocus>
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="input-group col-xs-12">
+                                            <input class="input--style-4 col-xs-12"  th:value="${user?.password}" name="password"
+                                                   placeholder="Password"
+                                                   type="password" ></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-2">
+                                            <button  class="btn btn--radius-2" type="submit" value="Sign In" name="Admin">Sign In</button>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <p th:each="msg : ${adminMsg}" th:text="${msg}"><p/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a  th:href="@{/signUp}"  style="float:right"> New User? Register Here..!!</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+
+function openForm(evt, formName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(formName).style.display = "block";
+  evt.currentTarget.className += " active";
+  document.getElementById("clickedBtn").innerHTML = formName;
+
+}
+
+document.getElementById("btnStudent").click();
+
+</script>
+</body>
+</html>
