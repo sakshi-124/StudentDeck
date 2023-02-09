@@ -10,7 +10,7 @@ Java (Spring Boot) based web application for international students to help with
 2. [Maven] - Automation tool
 3. [Heroku]- Deployment Tool
 # Learning outcome
-Clean code practice 
-Design patterns 
-S.O.L.I.D principles 
-Deployement
+1. Clean code practice 
+2. Design patterns 
+3. S.O.L.I.D principles 
+4. Deployement
