@@ -5,3 +5,6 @@ Java (Spring Boot) based web application for international students to help with
 2. Kevin Parke
 3. Neha Dadarwala
 4. Parthil Patel
+# Build with
+1. [Java] - Programming language 
+2. [Maven] - Automation tool
